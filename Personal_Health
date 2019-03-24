@@ -1,0 +1,35 @@
+from selenium import webdriver
+import time
+import unittest
+from Pages.loginpage import Loginpage
+from Pages.HomePage import HomePage
+import HtmlTestRunner
+from Tests.Login import LoginTest
+from Pages.Health import personal
+
+class Personal_Health():
+    @classmethod
+    def setUpClass(cls):
+        # driver = webdriver.Firefox(executable_path='D:\Testing\Automation\Python\Automation\CPHS\geckodriver-v0.24.0-win64\geckodriver.exe')
+        cls.driver = webdriver.Chrome(executable_path='D:\Testing\Automation\Python\Automation\CPHS\chromedriver_win32\chromedriver.exe')
+        cls.driver.implicitly_wait(10)
+        cls.driver.maximize_window()
+
+    def test_login_personal(self):
+        driver = self.driver
+        driver.get('http://svwp15:82/login')
+        login = Loginpage(driver)
+        login.enter_username("henrytaylor")
+        login.enter_password("Span@123")
+        login.click_login()
+
+
+    def health(self):
+        driver = self.driver
+        hel = personal(driver)
+        hel.click_personal_contact()
+
+if __name__ == '__main__':
+    unittest.main(testRunner = HtmlTestRunner.HTMLTestRunner(output='D:/Testing/Automation/Python/Automation/CPHS_DEMO/Reports'))
+
+
